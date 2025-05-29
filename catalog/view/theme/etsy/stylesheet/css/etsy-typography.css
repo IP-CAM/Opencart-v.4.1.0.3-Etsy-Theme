@@ -1,0 +1,241 @@
+/* ==========================================================================
+   Etsy Typography System
+   ========================================================================== */
+
+/* Font Face Declarations */
+@font-face {
+  font-family: 'Graphik';
+  src: url('../fonts/graphik/Graphik-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Graphik';
+  src: url('../fonts/graphik/Graphik-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Graphik';
+  src: url('../fonts/graphik/Graphik-Semibold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Graphik';
+  src: url('../fonts/graphik/Graphik-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Font Variables */
+:root {
+  /* Font Families */
+  --etsy-font-primary: 'Graphik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --etsy-font-secondary: 'Georgia', 'Times New Roman', serif;
+  --etsy-font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+
+  /* Font Sizes */
+  --etsy-font-size-xs: 0.75rem;    /* 12px */
+  --etsy-font-size-sm: 0.875rem;   /* 14px */
+  --etsy-font-size-base: 1rem;     /* 16px */
+  --etsy-font-size-lg: 1.125rem;   /* 18px */
+  --etsy-font-size-xl: 1.25rem;    /* 20px */
+  --etsy-font-size-2xl: 1.5rem;    /* 24px */
+  --etsy-font-size-3xl: 1.875rem;  /* 30px */
+  --etsy-font-size-4xl: 2.25rem;   /* 36px */
+  --etsy-font-size-5xl: 3rem;      /* 48px */
+
+  /* Font Weights */
+  --etsy-font-weight-normal: 400;
+  --etsy-font-weight-medium: 500;
+  --etsy-font-weight-semibold: 600;
+  --etsy-font-weight-bold: 700;
+
+  /* Line Heights */
+  --etsy-line-height-tight: 1.25;
+  --etsy-line-height-normal: 1.5;
+  --etsy-line-height-relaxed: 1.75;
+
+  /* Letter Spacing */
+  --etsy-letter-spacing-tight: -0.025em;
+  --etsy-letter-spacing-normal: 0;
+  --etsy-letter-spacing-wide: 0.025em;
+}
+
+/* Base Typography */
+html {
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--etsy-font-primary);
+  font-size: var(--etsy-font-size-base);
+  font-weight: var(--etsy-font-weight-normal);
+  line-height: var(--etsy-line-height-normal);
+  color: var(--etsy-text-primary);
+  background-color: var(--etsy-bg-primary);
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-family: var(--etsy-font-primary);
+  font-weight: var(--etsy-font-weight-semibold);
+  line-height: var(--etsy-line-height-tight);
+  color: var(--etsy-text-primary);
+}
+
+h1 {
+  font-size: var(--etsy-font-size-4xl);
+  font-weight: var(--etsy-font-weight-bold);
+  letter-spacing: var(--etsy-letter-spacing-tight);
+}
+
+h2 {
+  font-size: var(--etsy-font-size-3xl);
+  font-weight: var(--etsy-font-weight-semibold);
+}
+
+h3 {
+  font-size: var(--etsy-font-size-2xl);
+  font-weight: var(--etsy-font-weight-semibold);
+}
+
+h4 {
+  font-size: var(--etsy-font-size-xl);
+  font-weight: var(--etsy-font-weight-medium);
+}
+
+h5 {
+  font-size: var(--etsy-font-size-lg);
+  font-weight: var(--etsy-font-weight-medium);
+}
+
+h6 {
+  font-size: var(--etsy-font-size-base);
+  font-weight: var(--etsy-font-weight-medium);
+}
+
+/* Paragraphs */
+p {
+  margin: 0 0 1rem 0;
+  font-size: var(--etsy-font-size-base);
+  line-height: var(--etsy-line-height-normal);
+  color: var(--etsy-text-primary);
+}
+
+/* Links */
+a {
+  color: var(--etsy-text-link);
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+a:hover,
+a:focus {
+  color: var(--etsy-text-link-hover);
+  text-decoration: underline;
+}
+
+a:focus {
+  outline: 2px solid var(--etsy-border-focus);
+  outline-offset: 2px;
+}
+
+/* Lists */
+ul, ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Text Utilities */
+.etsy-text-xs { font-size: var(--etsy-font-size-xs); }
+.etsy-text-sm { font-size: var(--etsy-font-size-sm); }
+.etsy-text-base { font-size: var(--etsy-font-size-base); }
+.etsy-text-lg { font-size: var(--etsy-font-size-lg); }
+.etsy-text-xl { font-size: var(--etsy-font-size-xl); }
+.etsy-text-2xl { font-size: var(--etsy-font-size-2xl); }
+.etsy-text-3xl { font-size: var(--etsy-font-size-3xl); }
+.etsy-text-4xl { font-size: var(--etsy-font-size-4xl); }
+.etsy-text-5xl { font-size: var(--etsy-font-size-5xl); }
+
+.etsy-font-normal { font-weight: var(--etsy-font-weight-normal); }
+.etsy-font-medium { font-weight: var(--etsy-font-weight-medium); }
+.etsy-font-semibold { font-weight: var(--etsy-font-weight-semibold); }
+.etsy-font-bold { font-weight: var(--etsy-font-weight-bold); }
+
+.etsy-leading-tight { line-height: var(--etsy-line-height-tight); }
+.etsy-leading-normal { line-height: var(--etsy-line-height-normal); }
+.etsy-leading-relaxed { line-height: var(--etsy-line-height-relaxed); }
+
+.etsy-tracking-tight { letter-spacing: var(--etsy-letter-spacing-tight); }
+.etsy-tracking-normal { letter-spacing: var(--etsy-letter-spacing-normal); }
+.etsy-tracking-wide { letter-spacing: var(--etsy-letter-spacing-wide); }
+
+.etsy-text-left { text-align: left; }
+.etsy-text-center { text-align: center; }
+.etsy-text-right { text-align: right; }
+.etsy-text-justify { text-align: justify; }
+
+.etsy-uppercase { text-transform: uppercase; }
+.etsy-lowercase { text-transform: lowercase; }
+.etsy-capitalize { text-transform: capitalize; }
+
+.etsy-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.etsy-text-ellipsis {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+  
+  h1 {
+    font-size: var(--etsy-font-size-3xl);
+  }
+  
+  h2 {
+    font-size: var(--etsy-font-size-2xl);
+  }
+  
+  h3 {
+    font-size: var(--etsy-font-size-xl);
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: var(--etsy-font-size-2xl);
+  }
+  
+  h2 {
+    font-size: var(--etsy-font-size-xl);
+  }
+  
+  h3 {
+    font-size: var(--etsy-font-size-lg);
+  }
+}

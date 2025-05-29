@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html dir="{{ direction }}" lang="{{ lang }}">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>{{ title }}</title>
+  {% if description %}
+  <meta name="description" content="{{ description }}" />
+  {% endif %}
+  {% if keywords %}
+  <meta name="keywords" content="{{ keywords }}" />
+  {% endif %}
+  
+  <!-- Preload Critical Fonts -->
+  <link rel="preload" href="catalog/view/theme/etsy/fonts/graphik/Graphik-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="catalog/view/theme/etsy/fonts/graphik/Graphik-Medium.woff2" as="font" type="font/woff2" crossorigin>
+  
+  <!-- Critical CSS -->
+  <link href="catalog/view/theme/etsy/stylesheet/css/etsy-colors.css" rel="stylesheet" type="text/css" />
+  <link href="catalog/view/theme/etsy/stylesheet/css/etsy-typography.css" rel="stylesheet" type="text/css" />
+  <link href="catalog/view/theme/etsy/stylesheet/css/etsy-layout.css" rel="stylesheet" type="text/css" />
+  <link href="catalog/view/theme/etsy/stylesheet/css/etsy-components.css" rel="stylesheet" type="text/css" />
+  <link href="catalog/view/theme/etsy/stylesheet/css/etsy-main.css" rel="stylesheet" type="text/css" />
+  <link href="catalog/view/theme/etsy/stylesheet/css/etsy-responsive.css" rel="stylesheet" type="text/css" />
+  
+  <!-- Non-critical CSS -->
+  <link href="catalog/view/theme/etsy/stylesheet/css/etsy-animations.css" rel="stylesheet" type="text/css" media="print" onload="this.media='all'">
+  <link href="catalog/view/theme/etsy/stylesheet/css/etsy-utilities.css" rel="stylesheet" type="text/css" media="print" onload="this.media='all'">
+  
+  {% for style in styles %}
+  <link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}" />
+  {% endfor %}
+  
+  {% for script in scripts %}
+  <script src="{{ script.href }}" type="text/javascript"></script>
+  {% endfor %}
+  
+  {% for link in links %}
+  <link href="{{ link.href }}" rel="{{ link.rel }}" />
+  {% endfor %}
+  
+  {% for analytic in analytics %}
+  {{ analytic }}
+  {% endfor %}
+</head>
+<body>
+
+<!-- Skip to main content for accessibility -->
+<a href="#main-content" class="etsy-skip-link">{{ text_skip_to_content|default('Skip to main content') }}</a>
+
+<!-- Top Header Bar -->
+<div class="etsy-top-bar">
+  <div class="etsy-container">
+    <div class="etsy-top-bar__content">
+      <!-- Language & Currency -->
+      <div class="etsy-top-bar__left">
+        {% if languages|length > 1 %}
+        <div class="etsy-language-selector">
+          {{ language }}
+        </div>
+        {% endif %}
+        {% if currencies|length > 1 %}
+        <div class="etsy-currency-selector">
+          {{ currency }}
+        </div>
+        {% endif %}
+      </div>
+      
+      <!-- User Actions -->
+      <div class="etsy-top-bar__right">
+        <nav class="etsy-user-nav" aria-label="User navigation">
+          {% if logged %}
+          <a href="{{ account }}" class="etsy-user-nav__link">
+            <span class="etsy-icon etsy-icon--user"></span>
+            {{ text_account|default('Your Account') }}
+          </a>
+          <a href="{{ logout }}" class="etsy-user-nav__link">{{ text_logout|default('Logout') }}</a>
+          {% else %}
+          <a href="{{ login }}" class="etsy-user-nav__link">{{ text_login|default('Sign in') }}</a>
+          <a href="{{ register }}" class="etsy-user-nav__link etsy-user-nav__link--register">{{ text_register|default('Register') }}</a>
+          {% endif %}
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main Header -->
+<header class="etsy-header" role="banner">
+  <div class="etsy-container">
+    <div class="etsy-header__content">
+      
+      <!-- Mobile Menu Toggle -->
+      <button class="etsy-mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="etsy-hamburger">
+          <span class="etsy-hamburger__line"></span>
+          <span class="etsy-hamburger__line"></span>
+          <span class="etsy-hamburger__line"></span>
+        </span>
+      </button>
+      
+      <!-- Logo -->
+      <div class="etsy-header__logo">
+        {% if logo %}
+        <a href="{{ home }}" class="etsy-logo" aria-label="{{ name }} - Homepage">
+          <img src="{{ logo }}" alt="{{ name }}" class="etsy-logo__image" />
+        </a>
+        {% else %}
+        <a href="{{ home }}" class="etsy-logo etsy-logo--text">{{ name }}</a>
+        {% endif %}
+      </div>
+      
+      <!-- Main Search -->
+      <div class="etsy-header__search">
+        <form action="{{ action }}" method="get" class="etsy-search-form" role="search">
+          <div class="etsy-search-input-wrapper">
+            <input type="text" 
+                   name="search" 
+                   value="{{ search }}" 
+                   placeholder="{{ text_search|default('Search for anything') }}" 
+                   class="etsy-search-input"
+                   aria-label="Search products"
+                   autocomplete="off" />
+            <button type="submit" class="etsy-search-button" aria-label="Search">
+              <span class="etsy-icon etsy-icon--search"></span>
+            </button>
+          </div>
+          <!-- Search suggestions dropdown will be populated by JS -->
+          <div class="etsy-search-suggestions" role="listbox" aria-hidden="true"></div>
+        </form>
+      </div>
+      
+      <!-- Header Actions -->
+      <div class="etsy-header__actions">
+        
+        <!-- Favorites/Wishlist -->
+        {% if logged %}
+        <a href="{{ wishlist }}" class="etsy-header-action" aria-label="Your favorites">
+          <span class="etsy-icon etsy-icon--heart"></span>
+          <span class="etsy-header-action__text">{{ text_wishlist|default('Favorites') }}</span>
+          {% if wishlist_total > 0 %}
+          <span class="etsy-badge">{{ wishlist_total }}</span>
+          {% endif %}
+        </a>
+        {% endif %}
+        
+        <!-- Shopping Cart -->
+        <div class="etsy-header-action etsy-cart-wrapper">
+          {{ cart }}
+        </div>
+        
+        <!-- User Account (Desktop) -->
+        <div class="etsy-header-action etsy-user-menu-wrapper">
+          {% if logged %}
+          <button class="etsy-header-action etsy-user-menu-trigger" aria-expanded="false" aria-haspopup="true">
+            <span class="etsy-icon etsy-icon--user"></span>
+            <span class="etsy-header-action__text">{{ firstname }}</span>
+            <span class="etsy-icon etsy-icon--chevron-down"></span>
+          </button>
+          {% else %}
+          <a href="{{ login }}" class="etsy-header-action">
+            <span class="etsy-icon etsy-icon--user"></span>
+            <span class="etsy-header-action__text">{{ text_login|default('Sign in') }}</span>
+          </a>
+          {% endif %}
+          
+          <!-- User dropdown menu -->
+          {% if logged %}
+          <div class="etsy-user-menu" role="menu" aria-hidden="true">
+            <a href="{{ account }}" class="etsy-user-menu__item" role="menuitem">{{ text_account|default('Your Account') }}</a>
+            <a href="{{ order }}" class="etsy-user-menu__item" role="menuitem">{{ text_order|default('Order History') }}</a>
+            <a href="{{ transaction }}" class="etsy-user-menu__item" role="menuitem">{{ text_transaction|default('Transactions') }}</a>
+            <a href="{{ download }}" class="etsy-user-menu__item" role="menuitem">{{ text_download|default('Downloads') }}</a>
+            <hr class="etsy-user-menu__separator">
+            <a href="{{ logout }}" class="etsy-user-menu__item" role="menuitem">{{ text_logout|default('Sign out') }}</a>
+          </div>
+          {% endif %}
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+  <!-- Main Navigation -->
+  <nav class="etsy-main-nav" role="navigation" aria-label="Main navigation">
+    <div class="etsy-container">
+      {{ menu }}
+    </div>
+  </nav>
+  
+</header>
+
+<!-- Mobile Menu Overlay -->
+<div class="etsy-mobile-menu-overlay" aria-hidden="true"></div>
+
+<!-- Mobile Menu -->
+<nav class="etsy-mobile-menu" role="navigation" aria-label="Mobile navigation" aria-hidden="true">
+  <div class="etsy-mobile-menu__header">
+    <h2 class="etsy-mobile-menu__title">{{ text_menu|default('Menu') }}</h2>
+    <button class="etsy-mobile-menu__close" aria-label="Close menu">
+      <span class="etsy-icon etsy-icon--close"></span>
+    </button>
+  </div>
+  
+  <div class="etsy-mobile-menu__content">
+    <!-- Mobile search -->
+    <div class="etsy-mobile-search">
+      <form action="{{ action }}" method="get" class="etsy-search-form">
+        <div class="etsy-search-input-wrapper">
+          <input type="text" 
+                 name="search" 
+                 value="{{ search }}" 
+                 placeholder="{{ text_search|default('Search for anything') }}" 
+                 class="etsy-search-input" />
+          <button type="submit" class="etsy-search-button">
+            <span class="etsy-icon etsy-icon--search"></span>
+          </button>
+        </div>
+      </form>
+    </div>
+    
+    <!-- Mobile menu items will be populated by menu.twig -->
+    <div class="etsy-mobile-menu__nav">
+      {{ menu }}
+    </div>
+    
+    <!-- Mobile user section -->
+    <div class="etsy-mobile-menu__user">
+      {% if logged %}
+      <div class="etsy-mobile-user-info">
+        <span class="etsy-icon etsy-icon--user"></span>
+        <span>{{ firstname }}</span>
+      </div>
+      <a href="{{ account }}" class="etsy-mobile-menu__link">{{ text_account|default('Your Account') }}</a>
+      <a href="{{ wishlist }}" class="etsy-mobile-menu__link">{{ text_wishlist|default('Your Favorites') }}</a>
+      <a href="{{ order }}" class="etsy-mobile-menu__link">{{ text_order|default('Your Orders') }}</a>
+      <a href="{{ logout }}" class="etsy-mobile-menu__link">{{ text_logout|default('Sign out') }}</a>
+      {% else %}
+      <a href="{{ login }}" class="etsy-mobile-menu__link etsy-mobile-menu__link--primary">{{ text_login|default('Sign in') }}</a>
+      <a href="{{ register }}" class="etsy-mobile-menu__link">{{ text_register|default('Register') }}</a>
+      {% endif %}
+    </div>
+  </div>
+</nav>
+
+<main id="main-content" class="etsy-main" role="main">

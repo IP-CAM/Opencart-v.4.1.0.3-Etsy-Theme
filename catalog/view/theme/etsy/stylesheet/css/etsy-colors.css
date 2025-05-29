@@ -1,0 +1,120 @@
+/* ==========================================================================
+   Etsy Color System
+   ========================================================================== */
+
+   :root {
+    /* Primary Colors - Etsy Orange */
+    --etsy-orange: #F56500;
+    --etsy-orange-dark: #E55100;
+    --etsy-orange-light: #FF8A65;
+    --etsy-orange-lighter: #FFCCBC;
+    --etsy-orange-pale: #FFF3E0;
+  
+    /* Secondary Colors */
+    --etsy-teal: #00BCD4;
+    --etsy-teal-dark: #0097A7;
+    --etsy-teal-light: #4DD0E1;
+    
+    --etsy-green: #4CAF50;
+    --etsy-green-dark: #388E3C;
+    --etsy-green-light: #81C784;
+    
+    --etsy-pink: #E91E63;
+    --etsy-pink-dark: #C2185B;
+    --etsy-pink-light: #F48FB1;
+  
+    /* Neutral Colors */
+    --etsy-black: #222222;
+    --etsy-gray-dark: #595959;
+    --etsy-gray: #898989;
+    --etsy-gray-medium: #BCBCBC;
+    --etsy-gray-light: #E1E3DF;
+    --etsy-gray-lighter: #F4F4F4;
+    --etsy-gray-pale: #F7F7F7;
+    --etsy-white: #FFFFFF;
+  
+    /* Functional Colors */
+    --etsy-error: #D32F2F;
+    --etsy-error-light: #FFEBEE;
+    --etsy-success: #388E3C;
+    --etsy-success-light: #E8F5E8;
+    --etsy-warning: #F57C00;
+    --etsy-warning-light: #FFF8E1;
+    --etsy-info: #1976D2;
+    --etsy-info-light: #E3F2FD;
+  
+    /* Background Colors */
+    --etsy-bg-primary: var(--etsy-white);
+    --etsy-bg-secondary: var(--etsy-gray-pale);
+    --etsy-bg-tertiary: var(--etsy-gray-lighter);
+    --etsy-bg-overlay: rgba(34, 34, 34, 0.8);
+    --etsy-bg-modal: rgba(0, 0, 0, 0.6);
+  
+    /* Text Colors */
+    --etsy-text-primary: var(--etsy-black);
+    --etsy-text-secondary: var(--etsy-gray-dark);
+    --etsy-text-muted: var(--etsy-gray);
+    --etsy-text-white: var(--etsy-white);
+    --etsy-text-link: var(--etsy-orange);
+    --etsy-text-link-hover: var(--etsy-orange-dark);
+  
+    /* Border Colors */
+    --etsy-border-light: var(--etsy-gray-light);
+    --etsy-border-medium: var(--etsy-gray-medium);
+    --etsy-border-dark: var(--etsy-gray);
+    --etsy-border-focus: var(--etsy-orange);
+  
+    /* Shadow Colors */
+    --etsy-shadow-light: rgba(34, 34, 34, 0.08);
+    --etsy-shadow-medium: rgba(34, 34, 34, 0.12);
+    --etsy-shadow-dark: rgba(34, 34, 34, 0.16);
+    --etsy-shadow-focus: rgba(245, 101, 0, 0.25);
+  
+    /* Gradient Colors */
+    --etsy-gradient-orange: linear-gradient(135deg, var(--etsy-orange) 0%, var(--etsy-orange-dark) 100%);
+    --etsy-gradient-hero: linear-gradient(135deg, var(--etsy-orange-pale) 0%, var(--etsy-gray-pale) 100%);
+    --etsy-gradient-card: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.1) 100%);
+  }
+  
+  /* Dark Mode Color Overrides */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --etsy-bg-primary: #1A1A1A;
+      --etsy-bg-secondary: #2D2D2D;
+      --etsy-bg-tertiary: #3A3A3A;
+      --etsy-text-primary: #FFFFFF;
+      --etsy-text-secondary: #CCCCCC;
+      --etsy-text-muted: #999999;
+      --etsy-border-light: #404040;
+      --etsy-border-medium: #595959;
+      --etsy-shadow-light: rgba(255, 255, 255, 0.08);
+      --etsy-shadow-medium: rgba(255, 255, 255, 0.12);
+    }
+  }
+  
+  /* High Contrast Mode Support */
+  @media (prefers-contrast: high) {
+    :root {
+      --etsy-border-light: var(--etsy-black);
+      --etsy-border-medium: var(--etsy-black);
+      --etsy-text-muted: var(--etsy-black);
+    }
+  }
+  
+  /* Color Utility Classes */
+  .etsy-text-primary { color: var(--etsy-text-primary) !important; }
+  .etsy-text-secondary { color: var(--etsy-text-secondary) !important; }
+  .etsy-text-muted { color: var(--etsy-text-muted) !important; }
+  .etsy-text-white { color: var(--etsy-text-white) !important; }
+  .etsy-text-orange { color: var(--etsy-orange) !important; }
+  .etsy-text-error { color: var(--etsy-error) !important; }
+  .etsy-text-success { color: var(--etsy-success) !important; }
+  
+  .etsy-bg-primary { background-color: var(--etsy-bg-primary) !important; }
+  .etsy-bg-secondary { background-color: var(--etsy-bg-secondary) !important; }
+  .etsy-bg-orange { background-color: var(--etsy-orange) !important; }
+  .etsy-bg-white { background-color: var(--etsy-white) !important; }
+  
+  .etsy-border-light { border-color: var(--etsy-border-light) !important; }
+  .etsy-border-medium { border-color: var(--etsy-border-medium) !important; }
+  .etsy-border-orange { border-color: var(--etsy-orange) !important; }

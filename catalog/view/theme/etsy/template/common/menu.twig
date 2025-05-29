@@ -1,0 +1,174 @@
+{% if categories %}
+
+<!-- Desktop Navigation Menu -->
+<div class="etsy-nav-menu" data-menu="desktop">
+  <ul class="etsy-nav-list" role="menubar">
+    
+    <!-- Featured Categories -->
+    {% for category in categories %}
+    {% if category.children %}
+    
+    <!-- Category with Submenu -->
+    <li class="etsy-nav-item etsy-nav-item--has-submenu" role="presentation">
+      <a href="{{ category.href }}" 
+         class="etsy-nav-link etsy-nav-link--parent" 
+         role="menuitem" 
+         aria-haspopup="true" 
+         aria-expanded="false">
+        {{ category.name }}
+        <span class="etsy-icon etsy-icon--chevron-down etsy-nav-arrow"></span>
+      </a>
+      
+      <!-- Mega Menu for Large Categories -->
+      {% if category.children|length > 8 %}
+      <div class="etsy-mega-menu" role="menu" aria-hidden="true">
+        <div class="etsy-mega-menu-content">
+          
+          <!-- Featured Image -->
+          {% if category.image %}
+          <div class="etsy-mega-menu-featured">
+            <a href="{{ category.href }}" class="etsy-mega-menu-featured-link">
+              <img src="{{ category.image }}" alt="{{ category.name }}" class="etsy-mega-menu-featured-image" />
+              <div class="etsy-mega-menu-featured-content">
+                <h3 class="etsy-mega-menu-featured-title">{{ category.name }}</h3>
+                <p class="etsy-mega-menu-featured-text">{{ text_explore|default('Explore unique items') }}</p>
+              </div>
+            </a>
+          </div>
+          {% endif %}
+          
+          <!-- Category Grid -->
+          <div class="etsy-mega-menu-grid">
+            {% set chunk_size = (category.children|length / 3)|round(0, 'ceil') %}
+            {% for i in 0..2 %}
+            <div class="etsy-mega-menu-column">
+              {% for child in category.children|slice(i * chunk_size, chunk_size) %}
+              <div class="etsy-mega-menu-item">
+                <a href="{{ child.href }}" class="etsy-mega-menu-link" role="menuitem">
+                  {{ child.name }}
+                </a>
+                {% if child.children %}
+                <ul class="etsy-mega-menu-sublist">
+                  {% for grandchild in child.children|slice(0, 5) %}
+                  <li>
+                    <a href="{{ grandchild.href }}" class="etsy-mega-menu-sublink" role="menuitem">
+                      {{ grandchild.name }}
+                    </a>
+                  </li>
+                  {% endfor %}
+                  {% if child.children|length > 5 %}
+                  <li>
+                    <a href="{{ child.href }}" class="etsy-mega-menu-sublink etsy-mega-menu-sublink--more">
+                      {{ text_view_all|default('View all') }}
+                    </a>
+                  </li>
+                  {% endif %}
+                </ul>
+                {% endif %}
+              </div>
+              {% endfor %}
+            </div>
+            {% endfor %}
+          </div>
+          
+          <!-- Popular in Category -->
+          <div class="etsy-mega-menu-popular">
+            <h4 class="etsy-mega-menu-popular-title">{{ text_popular_in|default('Popular in') }} {{ category.name }}</h4>
+            <div class="etsy-mega-menu-tags">
+              <!-- These would be populated by popular search terms -->
+              <a href="#" class="etsy-mega-menu-tag">{{ text_handmade|default('Handmade') }}</a>
+              <a href="#" class="etsy-mega-menu-tag">{{ text_vintage|default('Vintage') }}</a>
+              <a href="#" class="etsy-mega-menu-tag">{{ text_custom|default('Custom') }}</a>
+              <a href="#" class="etsy-mega-menu-tag">{{ text_personalized|default('Personalized') }}</a>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      
+      {% else %}
+      
+      <!-- Simple Dropdown Menu -->
+      <ul class="etsy-dropdown-menu" role="menu" aria-hidden="true">
+        {% for child in category.children %}
+        <li role="presentation">
+          <a href="{{ child.href }}" class="etsy-dropdown-link" role="menuitem">
+            {{ child.name }}
+          </a>
+          {% if child.children %}
+          <ul class="etsy-dropdown-submenu">
+            {% for grandchild in child.children %}
+            <li>
+              <a href="{{ grandchild.href }}" class="etsy-dropdown-sublink" role="menuitem">
+                {{ grandchild.name }}
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </li>
+        {% endfor %}
+        
+        <!-- View All Link -->
+        <li class="etsy-dropdown-footer" role="presentation">
+          <a href="{{ category.href }}" class="etsy-dropdown-link etsy-dropdown-link--view-all" role="menuitem">
+            {{ text_view_all|default('View all in') }} {{ category.name }}
+          </a>
+        </li>
+      </ul>
+      
+      {% endif %}
+    </li>
+    
+    {% else %}
+    
+    <!-- Simple Category Link -->
+    <li class="etsy-nav-item" role="presentation">
+      <a href="{{ category.href }}" class="etsy-nav-link" role="menuitem">
+        {{ category.name }}
+      </a>
+    </li>
+    
+    {% endif %}
+    {% endfor %}
+    
+    <!-- Special Links -->
+    <li class="etsy-nav-item" role="presentation">
+      <a href="{{ special }}" class="etsy-nav-link etsy-nav-link--special" role="menuitem">
+        {{ text_special|default('Sale') }}
+      </a>
+    </li>
+    
+    <!-- Gift Guide (Seasonal) -->
+    <li class="etsy-nav-item" role="presentation">
+      <a href="#" class="etsy-nav-link etsy-nav-link--gift-guide" role="menuitem">
+        {{ text_gift_guide|default('Gift Guide') }}
+      </a>
+    </li>
+    
+  </ul>
+</div>
+
+<!-- Mobile Navigation Menu -->
+<div class="etsy-mobile-nav-menu" data-menu="mobile">
+  <div class="etsy-mobile-nav-content">
+    
+    <!-- Mobile Categories -->
+    {% for category in categories %}
+    <div class="etsy-mobile-nav-item">
+      
+      {% if category.children %}
+      <!-- Expandable Category -->
+      <div class="etsy-mobile-nav-header">
+        <a href="{{ category.href }}" class="etsy-mobile-nav-link">
+          {{ category.name }}
+        </a>
+        <button class="etsy-mobile-nav-toggle" 
+                aria-expanded="false" 
+                aria-label="Toggle {{ category.name }} submenu">
+          <span class="etsy-icon etsy-icon--chevron-down"></span>
+        </button>
+      </div>
+      
+      <div class="etsy-mobile-nav-submenu" aria-hidden="true">
+        <div class="etsy-mobile-nav-submenu-content">

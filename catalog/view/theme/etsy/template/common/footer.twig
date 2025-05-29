@@ -1,0 +1,193 @@
+</main>
+
+<!-- Newsletter Signup Section -->
+<section class="etsy-newsletter-section">
+  <div class="etsy-container">
+    <div class="etsy-newsletter-content">
+      <div class="etsy-newsletter-text">
+        <h2 class="etsy-newsletter-title">{{ text_newsletter_title|default('Yes! Send me exclusive offers, unique gift ideas, and personalized tips for shopping and selling on') }} {{ name }}.</h2>
+      </div>
+      <form class="etsy-newsletter-form" action="{{ newsletter }}" method="post">
+        <div class="etsy-newsletter-input-wrapper">
+          <input type="email" 
+                 name="email" 
+                 placeholder="{{ text_newsletter_placeholder|default('Enter your email') }}" 
+                 class="etsy-newsletter-input"
+                 required
+                 aria-label="Email address for newsletter signup" />
+          <button type="submit" class="etsy-newsletter-button">
+            {{ text_newsletter_button|default('Subscribe') }}
+          </button>
+        </div>
+        <p class="etsy-newsletter-terms">
+          {{ text_newsletter_terms|default('By clicking Subscribe, you agree to our') }} 
+          <a href="{{ privacy_policy }}" class="etsy-link">{{ text_privacy_policy|default('Privacy Policy') }}</a>.
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Main Footer -->
+<footer class="etsy-footer" role="contentinfo">
+  <div class="etsy-container">
+    
+    <!-- Footer Main Content -->
+    <div class="etsy-footer-main">
+      
+      <!-- Shop Categories -->
+      <div class="etsy-footer-section">
+        <h3 class="etsy-footer-title">{{ text_shop|default('Shop') }}</h3>
+        <ul class="etsy-footer-links">
+          {% for category in categories %}
+          <li><a href="{{ category.href }}" class="etsy-footer-link">{{ category.name }}</a></li>
+          {% endfor %}
+          <li><a href="{{ special }}" class="etsy-footer-link">{{ text_special|default('Specials') }}</a></li>
+          <li><a href="{{ contact }}" class="etsy-footer-link">{{ text_contact|default('Contact Us') }}</a></li>
+        </ul>
+      </div>
+      
+      <!-- Sell Section -->
+      <div class="etsy-footer-section">
+        <h3 class="etsy-footer-title">{{ text_sell|default('Sell') }}</h3>
+        <ul class="etsy-footer-links">
+          <li><a href="{{ affiliate }}" class="etsy-footer-link">{{ text_affiliate|default('Sell on') }} {{ name }}</a></li>
+          <li><a href="#" class="etsy-footer-link">{{ text_seller_handbook|default('Seller Handbook') }}</a></li>
+          <li><a href="#" class="etsy-footer-link">{{ text_seller_tools|default('Seller Tools') }}</a></li>
+          <li><a href="#" class="etsy-footer-link">{{ text_advertising|default('Advertising') }}</a></li>
+        </ul>
+      </div>
+      
+      <!-- About Section -->
+      <div class="etsy-footer-section">
+        <h3 class="etsy-footer-title">{{ text_about|default('About') }}</h3>
+        <ul class="etsy-footer-links">
+          <li><a href="{{ information }}" class="etsy-footer-link">{{ text_about_us|default('About Us') }}</a></li>
+          <li><a href="#" class="etsy-footer-link">{{ text_careers|default('Careers') }}</a></li>
+          <li><a href="#" class="etsy-footer-link">{{ text_press|default('Press') }}</a></li>
+          <li><a href="#" class="etsy-footer-link">{{ text_investors|default('Investors') }}</a></li>
+          <li><a href="{{ sitemap }}" class="etsy-footer-link">{{ text_sitemap|default('Sitemap') }}</a></li>
+        </ul>
+      </div>
+      
+      <!-- Help Section -->
+      <div class="etsy-footer-section">
+        <h3 class="etsy-footer-title">{{ text_help|default('Help') }}</h3>
+        <ul class="etsy-footer-links">
+          <li><a href="#" class="etsy-footer-link">{{ text_help_center|default('Help Center') }}</a></li>
+          <li><a href="{{ return }}" class="etsy-footer-link">{{ text_returns|default('Returns & Exchanges') }}</a></li>
+          <li><a href="#" class="etsy-footer-link">{{ text_trust_safety|default('Trust & Safety') }}</a></li>
+          <li><a href="{{ privacy_policy }}" class="etsy-footer-link">{{ text_privacy|default('Privacy Settings') }}</a></li>
+          <li><a href="{{ terms }}" class="etsy-footer-link">{{ text_terms|default('Terms of Use') }}</a></li>
+        </ul>
+      </div>
+      
+      <!-- Connect Section -->
+      <div class="etsy-footer-section">
+        <h3 class="etsy-footer-title">{{ text_connect|default('Connect') }}</h3>
+        <div class="etsy-social-links">
+          {% if facebook %}
+          <a href="{{ facebook }}" class="etsy-social-link" aria-label="Facebook" target="_blank" rel="noopener">
+            <span class="etsy-icon etsy-icon--facebook"></span>
+          </a>
+          {% endif %}
+          {% if twitter %}
+          <a href="{{ twitter }}" class="etsy-social-link" aria-label="Twitter" target="_blank" rel="noopener">
+            <span class="etsy-icon etsy-icon--twitter"></span>
+          </a>
+          {% endif %}
+          {% if instagram %}
+          <a href="{{ instagram }}" class="etsy-social-link" aria-label="Instagram" target="_blank" rel="noopener">
+            <span class="etsy-icon etsy-icon--instagram"></span>
+          </a>
+          {% endif %}
+          {% if pinterest %}
+          <a href="{{ pinterest }}" class="etsy-social-link" aria-label="Pinterest" target="_blank" rel="noopener">
+            <span class="etsy-icon etsy-icon--pinterest"></span>
+          </a>
+          {% endif %}
+          {% if youtube %}
+          <a href="{{ youtube }}" class="etsy-social-link" aria-label="YouTube" target="_blank" rel="noopener">
+            <span class="etsy-icon etsy-icon--youtube"></span>
+          </a>
+          {% endif %}
+        </div>
+        
+        <!-- Mobile App Links -->
+        <div class="etsy-app-links">
+          <h4 class="etsy-app-title">{{ text_download_app|default('Download the App') }}</h4>
+          <div class="etsy-app-badges">
+            <a href="#" class="etsy-app-badge" aria-label="Download on App Store">
+              <img src="catalog/view/theme/etsy/image/app-store-badge.svg" alt="Download on App Store" />
+            </a>
+            <a href="#" class="etsy-app-badge" aria-label="Get it on Google Play">
+              <img src="catalog/view/theme/etsy/image/google-play-badge.svg" alt="Get it on Google Play" />
+            </a>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+    <!-- Footer Bottom -->
+    <div class="etsy-footer-bottom">
+      <div class="etsy-footer-bottom-content">
+        
+        <!-- Country/Region Selector -->
+        <div class="etsy-footer-region">
+          <button class="etsy-region-selector" aria-expanded="false">
+            <span class="etsy-icon etsy-icon--globe"></span>
+            <span>{{ current_country|default('Global') }}</span>
+            <span class="etsy-icon etsy-icon--chevron-down"></span>
+          </button>
+          
+          <!-- Language and Currency in footer -->
+          <div class="etsy-footer-preferences">
+            {% if languages|length > 1 %}
+            <div class="etsy-footer-language">
+              {{ language }}
+            </div>
+            {% endif %}
+            {% if currencies|length > 1 %}
+            <div class="etsy-footer-currency">
+              {{ currency }}
+            </div>
+            {% endif %}
+          </div>
+        </div>
+        
+        <!-- Legal Links -->
+        <div class="etsy-footer-legal">
+          <p class="etsy-copyright">
+            © {{ date('Y') }} {{ name }}. {{ text_copyright|default('All rights reserved.') }}
+          </p>
+          <div class="etsy-legal-links">
+            <a href="{{ terms }}" class="etsy-legal-link">{{ text_terms|default('Terms of Use') }}</a>
+            <a href="{{ privacy_policy }}" class="etsy-legal-link">{{ text_privacy|default('Privacy') }}</a>
+            <a href="#" class="etsy-legal-link">{{ text_cookies|default('Cookies & Similar Technologies Policy') }}</a>
+            <a href="#" class="etsy-legal-link">{{ text_interest_ads|default('Interest-based ads') }}</a>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    
+  </div>
+</footer>
+
+<!-- Back to Top Button -->
+<button class="etsy-back-to-top" aria-label="Back to top" style="display: none;">
+  <span class="etsy-icon etsy-icon--arrow-up"></span>
+</button>
+
+<!-- JavaScript Files -->
+<script src="catalog/view/theme/etsy/js/etsy-main.js" defer></script>
+<script src="catalog/view/theme/etsy/js/etsy-components.js" defer></script>
+<script src="catalog/view/theme/etsy/js/etsy-animations.js" defer></script>
+
+{% for script in scripts %}
+<script src="{{ script.href }}" type="text/javascript"></script>
+{% endfor %}
+
+</body>
+</html>

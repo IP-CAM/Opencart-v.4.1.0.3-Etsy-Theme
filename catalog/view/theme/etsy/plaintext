@@ -1,0 +1,182 @@
+# OpenCart 4.1.0.3 Etsy风格主题目录结构
+
+## 主题根目录：`catalog/view/theme/etsy/`
+
+```
+catalog/view/theme/etsy/
+├── template/
+│   ├── common/
+│   │   ├── header.twig
+│   │   ├── footer.twig
+│   │   ├── menu.twig
+│   │   ├── search.twig
+│   │   ├── currency.twig
+│   │   ├── language.twig
+│   │   └── cart.twig
+│   ├── account/
+│   │   ├── login.twig
+│   │   ├── register.twig
+│   │   ├── account.twig
+│   │   ├── wishlist.twig
+│   │   ├── order.twig
+│   │   ├── return.twig
+│   │   ├── transaction.twig
+│   │   ├── recurring.twig
+│   │   ├── reward.twig
+│   │   ├── download.twig
+│   │   ├── edit.twig
+│   │   ├── password.twig
+│   │   ├── address.twig
+│   │   └── newsletter.twig
+│   ├── checkout/
+│   │   ├── cart.twig
+│   │   ├── checkout.twig
+│   │   ├── confirm.twig
+│   │   ├── success.twig
+│   │   └── failure.twig
+│   ├── extension/
+│   │   ├── module/
+│   │   │   ├── banner.twig
+│   │   │   ├── bestseller.twig
+│   │   │   ├── category.twig
+│   │   │   ├── featured.twig
+│   │   │   ├── latest.twig
+│   │   │   ├── special.twig
+│   │   │   ├── slideshow.twig
+│   │   │   └── testimonial.twig
+│   │   └── total/
+│   │       ├── shipping.twig
+│   │       ├── coupon.twig
+│   │       └── voucher.twig
+│   ├── information/
+│   │   ├── contact.twig
+│   │   ├── information.twig
+│   │   └── sitemap.twig
+│   ├── product/
+│   │   ├── category.twig
+│   │   ├── product.twig
+│   │   ├── search.twig
+│   │   ├── special.twig
+│   │   ├── manufacturer.twig
+│   │   └── compare.twig
+│   └── mail/
+│       ├── order_add.twig
+│       ├── order_edit.twig
+│       ├── return_add.twig
+│       └── voucher.twig
+├── stylesheet/
+│   ├── css/
+│   │   ├── etsy-main.css          # 主样式文件
+│   │   ├── etsy-components.css    # 组件样式
+│   │   ├── etsy-layout.css        # 布局样式
+│   │   ├── etsy-typography.css    # 字体样式
+│   │   ├── etsy-colors.css        # 颜色变量
+│   │   ├── etsy-responsive.css    # 响应式样式
+│   │   ├── etsy-animations.css    # 动画效果
+│   │   └── etsy-utilities.css     # 工具类样式
+│   └── scss/                      # SCSS源文件（可选）
+│       ├── _variables.scss
+│       ├── _mixins.scss
+│       ├── _base.scss
+│       ├── _components.scss
+│       ├── _layout.scss
+│       └── main.scss
+├── image/
+│   ├── icons/
+│   │   ├── heart.svg
+│   │   ├── cart.svg
+│   │   ├── search.svg
+│   │   ├── user.svg
+│   │   └── star.svg
+│   ├── placeholders/
+│   │   ├── product-placeholder.jpg
+│   │   └── category-placeholder.jpg
+│   └── backgrounds/
+│       ├── hero-bg.jpg
+│       └── pattern-bg.png
+├── js/
+│   ├── etsy-main.js              # 主JavaScript文件
+│   ├── etsy-components.js        # 组件交互
+│   ├── etsy-animations.js        # 动画控制
+│   ├── etsy-carousel.js          # 轮播组件
+│   ├── etsy-modal.js             # 模态框组件
+│   ├── etsy-filters.js           # 筛选功能
+│   └── etsy-wishlist.js          # 收藏功能
+└── fonts/
+    ├── graphik/                  # Etsy使用的Graphik字体系列
+    │   ├── Graphik-Regular.woff2
+    │   ├── Graphik-Medium.woff2
+    │   ├── Graphik-Semibold.woff2
+    │   └── Graphik-Bold.woff2
+    └── icons/
+        └── etsy-icons.woff2      # 图标字体
+
+## 管理后台主题文件：`admin/view/template/`
+
+```
+admin/view/template/
+├── common/
+│   ├── header.twig
+│   ├── column_left.twig
+│   └── footer.twig
+└── extension/
+    └── theme/
+        └── etsy.twig             # 主题配置页面
+```
+
+## 系统配置文件
+
+```
+system/
+├── config/
+│   └── etsy.php                  # 主题配置文件
+└── library/
+    └── template/
+        └── etsy.php              # 主题模板引擎扩展
+```
+
+## 主要特色功能模块
+
+### 1. Etsy风格组件
+- **产品卡片**：圆角设计，悬停效果，收藏按钮
+- **分类网格**：瀑布流布局，图片优先展示
+- **搜索栏**：居中大搜索框，智能提示
+- **导航菜单**：简洁水平导航，下拉分类
+- **用户头像**：圆形头像，下拉用户菜单
+
+### 2. 响应式布局
+- **移动端优先**：触摸友好的交互设计
+- **平板适配**：中等屏幕的网格布局优化
+- **桌面端**：多列布局，悬停交互丰富
+
+### 3. 颜色系统
+- **主色调**：Etsy橙色 (#F56500)
+- **辅助色**：深灰 (#222222)、浅灰 (#F7F7F7)
+- **强调色**：绿色 (#00A651)、红色 (#E60023)
+
+### 4. 字体系统
+- **主字体**：Graphik（Etsy官方字体）
+- **fallback**：Arial, Helvetica, sans-serif
+- **图标字体**：自定义SVG图标集
+
+## 安装说明
+
+1. 将整个 `etsy` 文件夹上传到 `catalog/view/theme/` 目录
+2. 在管理后台的 `系统 > 设置 > 商店设置` 中选择 "etsy" 主题
+3. 清除缓存和编译的模板文件
+4. 配置主题相关设置（颜色、字体、布局选项）
+
+## 文件命名规范
+
+- **CSS文件**：使用 `etsy-` 前缀，语义化命名
+- **JS文件**：使用 `etsy-` 前缀，功能性命名  
+- **图片文件**：使用小写字母和连字符
+- **模板文件**：遵循OpenCart标准命名规范
+
+## 开发注意事项
+
+1. **样式隔离**：所有样式都包含在CSS文件中，模板中不出现内联样式
+2. **兼容性**：确保与OpenCart 4.1.0.3核心功能完全兼容
+3. **性能优化**：CSS和JS文件支持压缩和合并
+4. **SEO友好**：保持良好的HTML语义结构
+5. **可维护性**：使用模块化的CSS和JS架构
