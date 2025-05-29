@@ -1,0 +1,157 @@
+/* ==========================================================================
+   Etsy动画效果
+   ========================================================================== */
+
+/* 滚动动画 */
+.etsy-scroll-animate {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.etsy-scroll-animate.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 悬停缩放效果 */
+.etsy-hover-zoom {
+  transition: transform 0.3s ease;
+}
+
+.etsy-hover-zoom.is-zoomed {
+  transform: scale(1.05);
+}
+
+/* 悬停淡入效果 */
+.etsy-hover-fade__content {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.etsy-hover-fade__content.is-active {
+  opacity: 1;
+}
+
+/* 悬停滑入效果 */
+.etsy-hover-slide__content {
+  display: none;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.etsy-hover-slide__content.is-active {
+  max-height: 500px;
+}
+
+/* 加载动画 */
+.etsy-load-animate {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.etsy-load-animate.is-loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 图片加载动画 */
+.etsy-image-animate {
+  position: relative;
+  overflow: hidden;
+}
+
+.etsy-image-animate::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--etsy-bg-secondary);
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  z-index: 1;
+}
+
+.etsy-image-animate.is-loaded::before {
+  opacity: 0;
+}
+
+.etsy-image-animate img {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.etsy-image-animate.is-loaded img {
+  opacity: 1;
+}
+
+/* 心形动画 */
+.etsy-icon--heart-animation {
+  animation: heart-pulse 0.6s ease-in-out;
+}
+
+@keyframes heart-pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* 模态框动画 */
+.etsy-modal {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.etsy-modal.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.etsy-modal-overlay {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.etsy-modal.is-active .etsy-modal-overlay {
+  opacity: 1;
+}
+
+.etsy-modal-container {
+  transform: translateY(20px);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.etsy-modal.is-active .etsy-modal-container {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* 加载中动画 */
+.etsy-spinner {
+  width: 40px;
+  height: 40px;
+  margin: 20px auto;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-top-color: var(--etsy-orange);
+  border-radius: 50%;
+  animation: spinner 0.8s linear infinite;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}

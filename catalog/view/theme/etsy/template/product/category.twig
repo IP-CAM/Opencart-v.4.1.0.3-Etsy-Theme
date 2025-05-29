@@ -1,0 +1,197 @@
+{{ header }}
+
+<div class="etsy-container">
+  <div class="etsy-breadcrumb">
+    {% for breadcrumb in breadcrumbs %}
+    <a href="{{ breadcrumb.href }}" class="etsy-breadcrumb__link">{{ breadcrumb.text }}</a>
+    {% if not loop.last %}
+    <span class="etsy-breadcrumb__separator">/</span>
+    {% endif %}
+    {% endfor %}
+  </div>
+  
+  <div class="etsy-category-header">
+    <h1 class="etsy-category-title">{{ heading_title }}</h1>
+    
+    {% if thumb %}
+    <div class="etsy-category-banner">
+      <img src="{{ thumb }}" alt="{{ heading_title }}" class="etsy-category-banner__image" />
+    </div>
+    {% endif %}
+    
+    {% if description %}
+    <div class="etsy-category-description">
+      {{ description }}
+    </div>
+    {% endif %}
+  </div>
+  
+  <div class="etsy-category-layout">
+    <!-- Sidebar Filters -->
+    <aside class="etsy-category-sidebar">
+      <div class="etsy-filter-section">
+        <h2 class="etsy-filter-title">{{ text_filter|default('Filter') }}</h2>
+        
+        <!-- Price Filter -->
+        <div class="etsy-filter-group">
+          <h3 class="etsy-filter-group__title">{{ text_price|default('Price') }}</h3>
+          <div class="etsy-price-slider">
+            <input type="range" min="0" max="1000" value="500" class="etsy-price-slider__input" id="priceRange">
+            <div class="etsy-price-slider__values">
+              <span id="priceMin">$0</span>
+              <span id="priceMax">$1000+</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Category Filter -->
+        {% if categories %}
+        <div class="etsy-filter-group">
+          <h3 class="etsy-filter-group__title">{{ text_category|default('Categories') }}</h3>
+          <ul class="etsy-filter-list">
+            {% for category in categories %}
+            <li class="etsy-filter-list__item">
+              <a href="{{ category.href }}" class="etsy-filter-list__link {{ category.category_id == category_id ? 'is-active' : '' }}">
+                {{ category.name }}
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+        
+        <!-- Manufacturer Filter -->
+        {% if manufacturers %}
+        <div class="etsy-filter-group">
+          <h3 class="etsy-filter-group__title">{{ text_manufacturer|default('Shops') }}</h3>
+          <ul class="etsy-filter-list">
+            {% for manufacturer in manufacturers %}
+            <li class="etsy-filter-list__item">
+              <label class="etsy-checkbox">
+                <input type="checkbox" name="manufacturer[]" value="{{ manufacturer.manufacturer_id }}" {{ manufacturer.manufacturer_id in manufacturer_id ? 'checked' : '' }}>
+                <span class="etsy-checkbox__checkmark"></span>
+                <span class="etsy-checkbox__label">{{ manufacturer.name }}</span>
+              </label>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+        
+        <!-- Apply Filters Button -->
+        <button type="button" id="button-filter" class="etsy-button etsy-button--primary etsy-filter-apply">
+          {{ button_filter|default('Apply Filters') }}
+        </button>
+      </div>
+    </aside>
+    
+    <!-- Main Content -->
+    <div class="etsy-category-content">
+      <!-- Sort and Display Options -->
+      <div class="etsy-category-controls">
+        <div class="etsy-sort">
+          <label for="input-sort" class="etsy-sort__label">{{ text_sort|default('Sort by:') }}</label>
+          <select id="input-sort" class="etsy-sort__select" onchange="location = this.value;">
+            {% for sorts in sorts %}
+            <option value="{{ sorts.href }}" {{ sorts.value == '%s-%s'|format(sort, order) ? 'selected' : '' }}>{{ sorts.text }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        
+        <div class="etsy-display">
+          <button type="button" id="grid-view" class="etsy-display__button etsy-display__button--grid is-active" aria-label="{{ text_grid|default('Grid view') }}">
+            <span class="etsy-icon etsy-icon--grid"></span>
+          </button>
+          <button type="button" id="list-view" class="etsy-display__button etsy-display__button--list" aria-label="{{ text_list|default('List view') }}">
+            <span class="etsy-icon etsy-icon--list"></span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Product Grid -->
+      {% if products %}
+      <div class="etsy-product-grid" id="etsy-product-grid">
+        {% for product in products %}
+        <div class="etsy-product-grid__item">
+          {% include 'catalog/view/theme/etsy/template/product/product_card.twig' %}
+        </div>
+        {% endfor %}
+      </div>
+      
+      <!-- Pagination -->
+      <div class="etsy-pagination">
+        {{ pagination }}
+      </div>
+      {% else %}
+      <div class="etsy-empty-state">
+        <div class="etsy-empty-state__icon">
+          <span class="etsy-icon etsy-icon--search"></span>
+        </div>
+        <h2 class="etsy-empty-state__title">{{ text_empty|default('No products found') }}</h2>
+        <p class="etsy-empty-state__message">{{ text_empty_help|default('Try adjusting your filters or search terms') }}</p>
+        <a href="{{ continue }}" class="etsy-button etsy-button--primary">{{ button_continue|default('Continue Shopping') }}</a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{{ footer }}
+
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+    // Grid/List view toggle
+    document.getElementById('grid-view').addEventListener('click', function() {
+      document.getElementById('etsy-product-grid').classList.remove('etsy-product-list');
+      document.getElementById('grid-view').classList.add('is-active');
+      document.getElementById('list-view').classList.remove('is-active');
+      localStorage.setItem('display', 'grid');
+    });
+    
+    document.getElementById('list-view').addEventListener('click', function() {
+      document.getElementById('etsy-product-grid').classList.add('etsy-product-list');
+      document.getElementById('list-view').classList.add('is-active');
+      document.getElementById('grid-view').classList.remove('is-active');
+      localStorage.setItem('display', 'list');
+    });
+    
+    // Load saved view preference
+    if (localStorage.getItem('display') == 'list') {
+      document.getElementById('list-view').click();
+    } else {
+      document.getElementById('grid-view').click();
+    }
+    
+    // Price slider
+    const priceSlider = document.getElementById('priceRange');
+    const priceMin = document.getElementById('priceMin');
+    const priceMax = document.getElementById('priceMax');
+    
+    if (priceSlider) {
+      priceSlider.addEventListener('input', function() {
+        const value = this.value;
+        priceMin.textContent = '$0';
+        priceMax.textContent = '$' + value + '+';
+      });
+    }
+    
+    // Filter button
+    document.getElementById('button-filter').addEventListener('click', function() {
+      let filter = [];
+      
+      // Get selected manufacturers
+      const manufacturerCheckboxes = document.querySelectorAll('input[name="manufacturer[]"]:checked');
+      if (manufacturerCheckboxes.length > 0) {
+        const manufacturers = Array.from(manufacturerCheckboxes).map(checkbox => checkbox.value);
+        filter.push('manufacturer_id=' + manufacturers.join(','));
+      }
+      
+      // Get price range
+      const priceValue = document.getElementById('priceRange').value;
+      filter.push('price=' + priceValue);
+      
+      // Redirect with filters
+      location = '{{ action }}' + (filter.length ? '&' + filter.join('&') : '');
+    });
+  });
+</script>

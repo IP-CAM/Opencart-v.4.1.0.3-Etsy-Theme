@@ -1,0 +1,196 @@
+{{ header }}
+
+<div class="etsy-container">
+  <div class="etsy-breadcrumb">
+    {% for breadcrumb in breadcrumbs %}
+    <a href="{{ breadcrumb.href }}" class="etsy-breadcrumb__link">{{ breadcrumb.text }}</a>
+    {% if not loop.last %}
+    <span class="etsy-breadcrumb__separator">/</span>
+    {% endif %}
+    {% endfor %}
+  </div>
+  
+  <div class="etsy-product-container">
+    <!-- Product Images -->
+    <div class="etsy-product__images">
+      <div class="etsy-product-gallery">
+        <!-- Main Image -->
+        <div class="etsy-product-gallery__main">
+          {% if thumb %}
+          <img src="{{ thumb }}" alt="{{ heading_title }}" title="{{ heading_title }}" class="etsy-product-gallery__image" id="etsy-main-image" data-zoom-image="{{ popup }}" />
+          {% endif %}
+          
+          {% if special %}
+          <span class="etsy-product-gallery__badge">{{ text_sale|default('Sale') }}</span>
+          {% endif %}
+          
+          <button type="button" 
+                  class="etsy-product-gallery__wishlist {{ wishlist ? 'is-active' : '' }}" 
+                  onclick="wishlist.add('{{ product_id }}');" 
+                  aria-label="{{ wishlist ? text_remove_wishlist|default('Remove from favorites') : text_add_wishlist|default('Add to favorites') }}">
+            <span class="etsy-icon etsy-icon--heart"></span>
+          </button>
+        </div>
+        
+        <!-- Thumbnails -->
+        {% if images %}
+        <div class="etsy-product-gallery__thumbs">
+          <div class="etsy-product-gallery__thumb-item is-active">
+            <img src="{{ thumb }}" alt="{{ heading_title }}" title="{{ heading_title }}" class="etsy-product-gallery__thumb" data-image="{{ thumb }}" data-zoom-image="{{ popup }}" />
+          </div>
+          
+          {% for image in images %}
+          <div class="etsy-product-gallery__thumb-item">
+            <img src="{{ image.thumb }}" alt="{{ heading_title }}" title="{{ heading_title }}" class="etsy-product-gallery__thumb" data-image="{{ image.popup }}" data-zoom-image="{{ image.popup }}" />
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    
+    <!-- Product Info -->
+    <div class="etsy-product__info">
+      <h1 class="etsy-product__title">{{ heading_title }}</h1>
+      
+      <!-- Shop Info -->
+      <div class="etsy-product__shop">
+        <span class="etsy-product__shop-label">{{ text_from|default('From') }}</span>
+        <a href="{{ manufacturer_href }}" class="etsy-product__shop-name">{{ manufacturer }}</a>
+      </div>
+      
+      <!-- Rating -->
+      {% if review_status %}
+      <div class="etsy-product__rating">
+        <div class="etsy-rating" aria-label="{{ text_rating|default('Rating') }}: {{ rating }} {{ text_out_of_5|default('out of 5 stars') }}">
+          {% for i in 1..5 %}
+          <span class="etsy-icon etsy-icon--star {{ i <= rating ? 'is-active' : '' }}"></span>
+          {% endfor %}
+        </div>
+        <a href="#reviews" class="etsy-product__reviews">{{ reviews }}</a>
+      </div>
+      {% endif %}
+      
+      <!-- Price -->
+      <div class="etsy-product__price">
+        {% if special %}
+        <span class="etsy-product__price-old">{{ price }}</span>
+        <span class="etsy-product__price-new">{{ special }}</span>
+        <span class="etsy-product__price-discount">{{ text_save|default('Save') }} {{ price_discount_percent }}%</span>
+        {% else %}
+        <span class="etsy-product__price-regular">{{ price }}</span>
+        {% endif %}
+        
+        {% if tax %}
+        <span class="etsy-product__tax">{{ text_tax }} {{ tax }}</span>
+        {% endif %}
+      </div>
+      
+      <!-- Options -->
+      {% if options %}
+      <div class="etsy-product__options">
+        <h3 class="etsy-product__options-title">{{ text_option|default('Available Options') }}</h3>
+        
+        {% for option in options %}
+        <div class="etsy-product-option">
+          <label class="etsy-product-option__label" for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
+          
+          {% if option.type == 'select' %}
+          <select name="option[{{ option.product_option_id }}]" id="input-option{{ option.product_option_id }}" class="etsy-product-option__select">
+            <option value="">{{ text_select|default('-- Please Select --') }}</option>
+            {% for option_value in option.product_option_value %}
+            <option value="{{ option_value.product_option_value_id }}">{{ option_value.name }}
+              {% if option_value.price %}
+              ({{ option_value.price_prefix }}{{ option_value.price }})
+              {% endif %}
+            </option>
+            {% endfor %}
+          </select>
+          
+          {% elseif option.type == 'radio' %}
+          <div class="etsy-product-option__radio-group">
+            {% for option_value in option.product_option_value %}
+            <label class="etsy-radio">
+              <input type="radio" name="option[{{ option.product_option_id }}]" value="{{ option_value.product_option_value_id }}" id="option-value-{{ option_value.product_option_value_id }}">
+              <span class="etsy-radio__checkmark"></span>
+              <span class="etsy-radio__label">{{ option_value.name }}
+                {% if option_value.price %}
+                ({{ option_value.price_prefix }}{{ option_value.price }})
+                {% endif %}
+              </span>
+            </label>
+            {% endfor %}
+          </div>
+          
+          {% elseif option.type == 'checkbox' %}
+          <div class="etsy-product-option__checkbox-group">
+            {% for option_value in option.product_option_value %}
+            <label class="etsy-checkbox">
+              <input type="checkbox" name="option[{{ option.product_option_id }}][]" value="{{ option_value.product_option_value_id }}" id="option-value-{{ option_value.product_option_value_id }}">
+              <span class="etsy-checkbox__checkmark"></span>
+              <span class="etsy-checkbox__label">{{ option_value.name }}
+                {% if option_value.price %}
+                ({{ option_value.price_prefix }}{{ option_value.price }})
+                {% endif %}
+              </span>
+            </label>
+            {% endfor %}
+          </div>
+          
+          {% elseif option.type == 'color' or option.type == 'image' %}
+          <div class="etsy-product-option__color-group">
+            {% for option_value in option.product_option_value %}
+            <label class="etsy-color-option" for="option-value-{{ option_value.product_option_value_id }}">
+              <input type="radio" name="option[{{ option.product_option_id }}]" value="{{ option_value.product_option_value_id }}" id="option-value-{{ option_value.product_option_value_id }}" class="etsy-color-option__input">
+              <span class="etsy-color-option__swatch" style="background-color: {{ option_value.color|default('#' ~ option_value.name|lower) }};"></span>
+              <span class="etsy-color-option__name">{{ option_value.name }}</span>
+            </label>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+      
+      <!-- Quantity and Add to Cart -->
+      <div class="etsy-product__actions">
+        <div class="etsy-product__quantity">
+          <label for="input-quantity" class="etsy-product__quantity-label">{{ entry_qty|default('Quantity') }}</label>
+          <div class="etsy-quantity-input">
+            <button type="button" class="etsy-quantity-input__minus" aria-label="{{ text_decrease|default('Decrease quantity') }}">-</button>
+            <input type="text" name="quantity" value="{{ minimum }}" size="2" id="input-quantity" class="etsy-quantity-input__field" />
+            <button type="button" class="etsy-quantity-input__plus" aria-label="{{ text_increase|default('Increase quantity') }}">+</button>
+          </div>
+        </div>
+        
+        <input type="hidden" name="product_id" value="{{ product_id }}" />
+        
+        <div class="etsy-product__buttons">
+          <button type="button" id="button-cart" class="etsy-button etsy-button--primary etsy-button--large etsy-product__add-to-cart">
+            <span class="etsy-icon etsy-icon--cart"></span>
+            {{ button_cart|default('Add to cart') }}
+          </button>
+          
+          <button type="button" class="etsy-button etsy-button--secondary etsy-product__wishlist-btn" onclick="wishlist.add('{{ product_id }}');">
+            <span class="etsy-icon etsy-icon--heart"></span>
+            {{ button_wishlist|default('Add to favorites') }}
+          </button>
+        </div>
+      </div>
+      
+      <!-- Shipping Info -->
+      <div class="etsy-product__shipping">
+        <div class="etsy-product__shipping-icon">
+          <span class="etsy-icon etsy-icon--shipping"></span>
+        </div>
+        <div class="etsy-product__shipping-info">
+          <h4 class="etsy-product__shipping-title">{{ text_shipping|default('Shipping') }}</h4>
+          <p class="etsy-product__shipping-text">{{ text_shipping_info|default('Free shipping on orders over $35') }}</p>
+        </div>
+      </div>
+      
+      <!-- Share -->
+      <div class="etsy-product__share">
+        <span class="etsy-product__share-label">{{ text_share|default('Share') }}:</span>
+        <div class="etsy-product__share-buttons"

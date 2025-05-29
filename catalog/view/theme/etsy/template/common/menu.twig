@@ -24,7 +24,74 @@
       <div class="etsy-mega-menu" role="menu" aria-hidden="true">
         <div class="etsy-mega-menu-content">
           
-          <!-- Featured Image -->
+          <!-- View All Category Link -->
+          <div class="etsy-mobile-nav-all">
+            <a href="{{ category.href }}" class="etsy-mobile-nav-all-link">
+              <span class="etsy-icon etsy-icon--grid"></span>
+              {{ text_view_all|default('View all in') }} {{ category.name }}
+            </a>
+          </div>
+          
+          <!-- Subcategories -->
+          <div class="etsy-mobile-nav-subcategories">
+            {% for child in category.children %}
+            <div class="etsy-mobile-nav-subitem">
+              {% if child.children %}
+              <div class="etsy-mobile-nav-subheader">
+                <a href="{{ child.href }}" class="etsy-mobile-nav-sublink">
+                  {{ child.name }}
+                </a>
+                <button class="etsy-mobile-nav-subtoggle" 
+                        aria-expanded="false" 
+                        aria-label="Toggle {{ child.name }} submenu">
+                  <span class="etsy-icon etsy-icon--chevron-down"></span>
+                </button>
+              </div>
+              <div class="etsy-mobile-nav-subsubmenu" aria-hidden="true">
+                {% for grandchild in child.children %}
+                <a href="{{ grandchild.href }}" class="etsy-mobile-nav-subsublink">
+                  {{ grandchild.name }}
+                </a>
+                {% endfor %}
+              </div>
+              {% else %}
+              <a href="{{ child.href }}" class="etsy-mobile-nav-sublink">
+                {{ child.name }}
+              </a>
+              {% endif %}
+            </div>
+            {% endfor %}
+          </div>
+          
+        </div>
+      </div>
+      
+      {% else %}
+      <!-- Simple Mobile Category -->
+      <a href="{{ category.href }}" class="etsy-mobile-nav-link etsy-mobile-nav-link--simple">
+        {{ category.name }}
+      </a>
+      {% endif %}
+      
+    </div>
+    {% endfor %}
+    
+    <!-- Mobile Special Links -->
+    <div class="etsy-mobile-nav-special">
+      <a href="{{ special }}" class="etsy-mobile-nav-link etsy-mobile-nav-link--special">
+        <span class="etsy-icon etsy-icon--tag"></span>
+        {{ text_special|default('Sale') }}
+      </a>
+      <a href="#" class="etsy-mobile-nav-link etsy-mobile-nav-link--gift-guide">
+        <span class="etsy-icon etsy-icon--gift"></span>
+        {{ text_gift_guide|default('Gift Guide') }}
+      </a>
+    </div>
+    
+  </div>
+</div>
+
+{% endif %} Featured Image -->
           {% if category.image %}
           <div class="etsy-mega-menu-featured">
             <a href="{{ category.href }}" class="etsy-mega-menu-featured-link">
@@ -172,3 +239,5 @@
       
       <div class="etsy-mobile-nav-submenu" aria-hidden="true">
         <div class="etsy-mobile-nav-submenu-content">
+          
+          <!--

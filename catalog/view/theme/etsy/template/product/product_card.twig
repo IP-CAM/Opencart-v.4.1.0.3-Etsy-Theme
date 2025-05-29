@@ -1,0 +1,58 @@
+<div class="etsy-product-card">
+  <div class="etsy-product-card__image-wrapper">
+    {% if product.thumb %}
+    <a href="{{ product.href }}" class="etsy-product-card__image-link">
+      <img src="{{ product.thumb }}" alt="{{ product.name }}" class="etsy-product-card__image" />
+      {% if product.special %}
+      <span class="etsy-product-card__badge">{{ text_sale|default('Sale') }}</span>
+      {% endif %}
+    </a>
+    {% endif %}
+    
+    <button type="button" 
+            class="etsy-product-card__wishlist {{ product.wishlist ? 'is-active' : '' }}" 
+            onclick="wishlist.add('{{ product.product_id }}');" 
+            aria-label="{{ product.wishlist ? text_remove_wishlist|default('Remove from favorites') : text_add_wishlist|default('Add to favorites') }}">
+      <span class="etsy-icon etsy-icon--heart"></span>
+    </button>
+  </div>
+  
+  <div class="etsy-product-card__content">
+    <h3 class="etsy-product-card__title">
+      <a href="{{ product.href }}">{{ product.name }}</a>
+    </h3>
+    
+    <div class="etsy-product-card__shop">
+      {{ product.manufacturer ? product.manufacturer : text_shop|default('Shop') }}
+    </div>
+    
+    {% if product.rating %}
+    <div class="etsy-product-card__rating">
+      <div class="etsy-rating" aria-label="{{ text_rating|default('Rating') }}: {{ product.rating }} {{ text_out_of_5|default('out of 5 stars') }}">
+        {% for i in 1..5 %}
+        <span class="etsy-icon etsy-icon--star {{ i <= product.rating ? 'is-active' : '' }}"></span>
+        {% endfor %}
+      </div>
+      <span class="etsy-product-card__reviews">({{ product.reviews }})</span>
+    </div>
+    {% endif %}
+    
+    <div class="etsy-product-card__price">
+      {% if product.special %}
+      <span class="etsy-product-card__price-old">{{ product.price }}</span>
+      <span class="etsy-product-card__price-new">{{ product.special }}</span>
+      {% else %}
+      <span class="etsy-product-card__price-regular">{{ product.price }}</span>
+      {% endif %}
+    </div>
+    
+    <div class="etsy-product-card__actions">
+      <button type="button" 
+              class="etsy-button etsy-button--primary etsy-product-card__add-to-cart" 
+              onclick="cart.add('{{ product.product_id }}');">
+        <span class="etsy-icon etsy-icon--cart"></span>
+        {{ button_cart|default('Add to cart') }}
+      </button>
+    </div>
+  </div>
+</div>

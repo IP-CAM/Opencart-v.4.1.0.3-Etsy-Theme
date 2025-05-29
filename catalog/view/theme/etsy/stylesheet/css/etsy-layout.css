@@ -1,0 +1,437 @@
+/* ==========================================================================
+   Etsy Layout System
+   ========================================================================== */
+
+/* Base Layout */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.etsy-main {
+  flex: 1 0 auto;
+}
+
+/* Skip Link (Accessibility) */
+.etsy-skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--etsy-orange);
+  color: white;
+  padding: 8px;
+  z-index: 100;
+  transition: top 0.3s;
+}
+
+.etsy-skip-link:focus {
+  top: 0;
+}
+
+/* Top Bar */
+.etsy-top-bar {
+  background-color: var(--etsy-bg-secondary);
+  padding: 0.5rem 0;
+  font-size: var(--etsy-font-size-sm);
+  border-bottom: 1px solid var(--etsy-border-light);
+}
+
+.etsy-top-bar__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Header */
+.etsy-header {
+  background-color: var(--etsy-bg-primary);
+  border-bottom: 1px solid var(--etsy-border-light);
+  position: relative;
+  z-index: 10;
+}
+
+.etsy-header__content {
+  padding: 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.etsy-header__logo {
+  margin-right: 1rem;
+}
+
+.etsy-header__search {
+  flex: 1;
+  margin: 0.75rem 0;
+  order: 3;
+  width: 100%;
+}
+
+.etsy-header__actions {
+  display: flex;
+  align-items: center;
+}
+
+/* Main Navigation */
+.etsy-main-nav {
+  background-color: var(--etsy-bg-primary);
+  border-bottom: 1px solid var(--etsy-border-light);
+  display: none; /* Hidden on mobile, shown via media query */
+}
+
+/* Main Content Area */
+.etsy-main {
+  padding: 2rem 0;
+}
+
+/* Section Layouts */
+.etsy-section {
+  margin-bottom: 3rem;
+}
+
+.etsy-section__header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.etsy-section__title {
+  font-size: var(--etsy-font-size-2xl);
+  margin-bottom: 0.5rem;
+}
+
+.etsy-section__subtitle {
+  font-size: var(--etsy-font-size-lg);
+  color: var(--etsy-text-secondary);
+}
+
+/* Product Layout */
+.etsy-product-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.etsy-product__images {
+  margin-bottom: 1.5rem;
+}
+
+.etsy-product__info {
+  flex: 1;
+}
+
+/* Category Layout */
+.etsy-category-header {
+  margin-bottom: 2rem;
+}
+
+.etsy-category-description {
+  margin-bottom: 1.5rem;
+}
+
+/* Newsletter Section */
+.etsy-newsletter-section {
+  background-color: var(--etsy-bg-secondary);
+  padding: 3rem 0;
+  margin-top: 2rem;
+}
+
+.etsy-newsletter-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Footer */
+.etsy-footer {
+  background-color: var(--etsy-bg-tertiary);
+  padding: 3rem 0 1.5rem;
+  margin-top: auto;
+}
+
+.etsy-footer-main {
+  margin-bottom: 2.5rem;
+}
+
+.etsy-footer-section {
+  margin-bottom: 2rem;
+}
+
+.etsy-footer-bottom {
+  border-top: 1px solid var(--etsy-border-light);
+  padding-top: 1.5rem;
+  font-size: var(--etsy-font-size-sm);
+}
+
+.etsy-footer-bottom-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.etsy-footer-copyright {
+  margin: 1rem 0;
+}
+
+/* Container */
+.etsy-container {
+  width: 100%;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* Grid System */
+.etsy-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.5rem;
+}
+
+.etsy-grid--2-cols {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.etsy-grid--3-cols {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.etsy-grid--4-cols {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* Flex Layouts */
+.etsy-flex {
+  display: flex;
+}
+
+.etsy-flex--wrap {
+  flex-wrap: wrap;
+}
+
+.etsy-flex--center {
+  align-items: center;
+  justify-content: center;
+}
+
+.etsy-flex--between {
+  justify-content: space-between;
+}
+
+.etsy-flex--column {
+  flex-direction: column;
+}
+
+/* Spacing System */
+.etsy-section {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.etsy-section--lg {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.etsy-section--sm {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.etsy-mt-0 { margin-top: 0; }
+.etsy-mt-1 { margin-top: 0.25rem; }
+.etsy-mt-2 { margin-top: 0.5rem; }
+.etsy-mt-3 { margin-top: 0.75rem; }
+.etsy-mt-4 { margin-top: 1rem; }
+.etsy-mt-6 { margin-top: 1.5rem; }
+.etsy-mt-8 { margin-top: 2rem; }
+.etsy-mt-12 { margin-top: 3rem; }
+.etsy-mt-16 { margin-top: 4rem; }
+
+.etsy-mb-0 { margin-bottom: 0; }
+.etsy-mb-1 { margin-bottom: 0.25rem; }
+.etsy-mb-2 { margin-bottom: 0.5rem; }
+.etsy-mb-3 { margin-bottom: 0.75rem; }
+.etsy-mb-4 { margin-bottom: 1rem; }
+.etsy-mb-6 { margin-bottom: 1.5rem; }
+.etsy-mb-8 { margin-bottom: 2rem; }
+.etsy-mb-12 { margin-bottom: 3rem; }
+.etsy-mb-16 { margin-bottom: 4rem; }
+
+/* Layout Components */
+
+/* Header Layout */
+.etsy-top-bar {
+  background-color: var(--etsy-bg-secondary);
+  padding: 0.5rem 0;
+  font-size: var(--etsy-font-size-sm);
+}
+
+.etsy-top-bar__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.etsy-header {
+  background-color: var(--etsy-bg-primary);
+  border-bottom: 1px solid var(--etsy-border-light);
+  position: relative;
+  z-index: 100;
+}
+
+.etsy-header__content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+}
+
+.etsy-header__logo {
+  flex: 0 0 auto;
+  margin-right: 2rem;
+}
+
+.etsy-header__search {
+  flex: 1 1 auto;
+  max-width: 650px;
+}
+
+.etsy-header__actions {
+  display: flex;
+  align-items: center;
+  margin-left: 1.5rem;
+}
+
+.etsy-main-nav {
+  border-bottom: 1px solid var(--etsy-border-light);
+}
+
+/* Footer Layout */
+.etsy-footer {
+  background-color: var(--etsy-bg-secondary);
+  padding-top: 3rem;
+  padding-bottom: 2rem;
+}
+
+.etsy-footer-main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.etsy-footer-bottom {
+  border-top: 1px solid var(--etsy-border-light);
+  padding-top: 1.5rem;
+}
+
+.etsy-footer-bottom-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Product Grid Layout */
+/* 产品网格布局 */
+.etsy-product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 576px) {
+  .etsy-product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .etsy-product-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .etsy-product-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.75rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .etsy-product-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  .etsy-product-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+/* Product Card Layout */
+.etsy-product-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.etsy-product-card__image-container {
+  position: relative;
+  padding-bottom: 100%; /* 1:1 Aspect Ratio */
+  overflow: hidden;
+  border-radius: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.etsy-product-card__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.etsy-product-card__content {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Category Layout */
+.etsy-category-header {
+  margin-bottom: 2rem;
+}
+
+.etsy-category-filters {
+  margin-bottom: 1.5rem;
+}
+
+/* Checkout Layout */
+.etsy-checkout-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+/* Account Layout */
+.etsy-account-grid {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 2rem;
+}
